@@ -17,10 +17,12 @@ export default{
                 
                 axios
             .post(`http://127.0.0.1:3333/insertUser`, this.details)
-            .then((response) => alert(response.data))
-            // alert('Inserted Successfully!')
+            .then((response) =>{
+             alert('Signed up Successfully!')
                      this.resetform();     
                      this.$router.push('/');  
+            })
+            
      
          },
          resetform(){
@@ -34,13 +36,14 @@ export default{
 </script>
 
 <template>
-    <h1>FeedGram</h1>
-    <h2>Sign Up</h2>
-    <form @submit.prevent="insert">
-    <input type="text" v-model="this.details.username" placeholder="Enter the username">
-    <input type="password" v-model="this.details.password" placeholder="Enter the password">
-    <input type="text" v-model="this.details.bio" placeholder="Enter your bio">
-    <button type="submit"> Sign Up </button>
+    <h1>FeedGram</h1><br>
+  
+    <form @submit.prevent="insert" id="form"><br>  <h2>Sign Up</h2><br>
+    <input type="text" v-model="this.details.username" placeholder="Enter the username" required><br>
+    <input type="password" v-model="this.details.password" placeholder="Enter the password" required><br>
+    <input type="text" v-model="this.details.bio" placeholder="Enter your bio"><br><br>
+    <button type="submit"> Sign Up </button><br>
+    <button  @click="this.$router.push('/')">Back</button><br>
     </form>
 </template>
 

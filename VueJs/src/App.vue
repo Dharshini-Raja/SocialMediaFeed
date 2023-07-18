@@ -5,7 +5,7 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
 
-        <RouterLink to="/"></RouterLink>
+        <!-- <RouterLink to="/"></RouterLink> -->
 
 
   <RouterView />

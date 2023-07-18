@@ -10,5 +10,8 @@ export default{
 <template>
 <Feed />
 </template>
+
+
 <style>
+
 </style>
