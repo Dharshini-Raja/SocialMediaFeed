@@ -19,14 +19,17 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import LogMiddleware from '../app/Middleware/LogAudit';
+import { Request } from '@adonisjs/core/build/standalone'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-Route.post('insertUser','UsersController.insert')
-Route.get('checkLogin/:username/:password','UsersController.checkLogin')
-
-
-Route.post('insertPost','FeedsController.insert')
-Route.get('view','FeedsController.selectAllRows')
-Route.get('like/:id','FeedsController.updateLike')
-Route.post('comment','FeedsController.commentInsert')
+Route.post('insertUser','UsersController.insert').middleware('LogAudit')
+Route.post('checkLogins','UsersController.checkLogin').middleware('LogAudit')
 
 
+Route.post('insertPost','FeedsController.insert').middleware('LogAudit')
+Route.get('view','FeedsController.selectAllRows').middleware('LogAudit')
+Route.put('like/:id','FeedsController.updateLike').middleware('LogAudit')
+Route.post('comment','FeedsController.commentInsert').middleware('LogAudit')
+
+Route.get('/logging', 'LogAuditsController.handle')

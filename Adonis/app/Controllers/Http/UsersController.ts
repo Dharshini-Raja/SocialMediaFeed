@@ -31,12 +31,25 @@ export default class UsersController {
             }
             
     }
-    public async checkLogin({ params }: HttpContextContract){
-        const result = await users.findBy('username', params.username)
+    public async checkLogin({ request }: HttpContextContract){
+        const newPostSchema = schema.create({
+            username: schema.string(),
+            password: schema.string()
+                        
+                      })
+        const payload = await request.validate({ schema: newPostSchema })
+        
+        // const result = await users.create({
+        //     username: payload.username,
+        //     password: payload.username
+            
+        //   })
+        const result = await users.findBy('username', payload.username)
+        console.log(payload.username)
         if(result == null){
             return "No rows are selected"
         }else{
-            if(result.password == params.password)
+            if(result.password == payload.password)
             return result
         }
     }
